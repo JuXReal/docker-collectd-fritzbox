@@ -7,6 +7,10 @@ services:
     container_name: grafana
     volumes:
       - /mnt/user/appdata/grafana:/var/lib/grafana
+
+#Notes for Docker for Windows Users example
+      - F:\grafana:/var/lib/grafana
+
     ports:
       - "3000:3000"
     depends_on:
@@ -27,12 +31,16 @@ services:
     image: jammsen/collectd-fritzbox:latest
     network_mode: host
     container_name: collectd-fritzbox
+    
+    # Notes for beginners - Std. Fritzbox IP 192.168.178.1 maybe Fritz.box should work for everyone
     environment:
       - TIMEZONE=Europe/Berlin
       - CheckInterval=3
       - InfluxDbIp=10.0.0.10
       - InfluxDbCollectdPort=25826
       - FritzBoxIp=10.0.0.1
+      
+    #Notes for beginner - First! Create this User in your Fritzbox! System - FritzBox-User -> Users 
       - FritzBoxUser=collectd
       - FritzBoxPassword=123collectd
     depends_on:
